@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from django.views import View
-from .models import Customer, Product, Cart, OrderPlaced 
+from .models import Contact, Customer, Product, Cart, OrderPlaced 
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
