@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from django.views import View
-from .models import Customer, Product, Cart, OrderPlaced 
+from .models import Contact, Customer, Product, Cart, OrderPlaced 
 from .forms import CustomerRegistrationForm, CustomerProfileForm
 from django.contrib import messages
 from django.db.models import Q
@@ -23,7 +23,10 @@ class ProductView(View):
         return render(request, 'app/home.html', {'menstopwears':menstopwears,'womenstopwears':womenstopwears, 'mensbottomwears':mensbottomwears, 'womensbottomwears':womensbottomwears, 'mobiles':mobiles, 'laptop':laptop, 'totalitem':totalitem})
 
 
-
+def search(request):
+		q=request.GET['q']
+		data=Product.objects.filter(title__icontains=q).order_by('-id')
+		return render(request,'app/search.html',{'data':data})
 
 class ProductDetailView(View):
 	def get(self, request, pk):
@@ -363,3 +366,5 @@ class ProfileView(View):
 		 {'form':form, 'active':'btn-primary',
 		  'totalitem':totalitem})
 
+    # search
+	
